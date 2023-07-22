@@ -22,6 +22,7 @@ output1<-phyimpute(otudata=otu.tab, tree=phytree)
 output2 <- unifracimpute(otudata=otu.tab, tree=phytree)
 
 ####### Plot the Results #######
+
 library(scales)
 
 library(car)
