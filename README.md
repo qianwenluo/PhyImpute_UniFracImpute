@@ -23,6 +23,5 @@ output2 <- unifracimpute(otudata=otu.tab, tree=phytree)
 
 ####### Plot the Results #######
 
-plot(output1, main="PhyImpute)
+plot(output1, main="PhyImpute")
 
-abline(v = 2.78, h=9.1)
