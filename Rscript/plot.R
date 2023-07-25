@@ -9,22 +9,15 @@ plot <- function(datain, main){
 #### Example ####
 
 pv1 <- read.csv("phyImputed.csv",row.names=1)
-
 pv2 <- read.csv("Unifracimputed.csv",row.names=1)
-
 raw <- read.csv("otu_example.csv",row.names=1)
 
 pdf("mean_sd_scatter_epplise.pdf",width = 6.69)
 par(mfrow = c(2,2))
-
 plot(pv1, main="phyImpute");
-
 abline(v = 2.78, h=9.1)
-
 plot(pv2, main = "UniFracImpute")
 abline(v = 2.81, h=9)
-
 plot(raw, main = "NoImpute")
 abline(v = 4.42, h=5.85)
-
 dev.off()
