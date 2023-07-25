@@ -17,11 +17,11 @@ otu.tab <- read.csv("otu_example.csv",row.names = 1,check.names = FALSE)
 
 output1<-phyimpute(otudata=otu.tab, tree=phytree)
 
-####### UniFracImpute ##########
+####### UniFracImpute ###########
 
 output2 <- unifracimpute(otudata=otu.tab, tree=phytree)
 
-####### Plot the Results #######
+####### Plot the Results ##########
 
 plot(output1, main="PhyImpute")
 
