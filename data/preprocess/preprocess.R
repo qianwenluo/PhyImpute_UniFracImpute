@@ -77,10 +77,9 @@ source("gamma_norm.R")
 
   y_sim <- impute_mat
   # }
-  ############### y_sim is the y_comp, apply mbImpute on the real data, and consider as complete data ##########
+  
   y_sim <- y_sim - 1.5
-  #write.csv(y_sim, "Karlsson_simulated.csv")
-  ####### learn from learning missing rate empirically ############
+  
   
   otable <- y_preserve
   meta_tab <- meta_data_T2D
