@@ -3,8 +3,21 @@
 phyimpute <- function(otudata, tree){
   ####### calculate the probabilities of non-biological zeros #######
   input <- t(otudata)
+  if (method == 'pnb'){
   offsets <- as.numeric(log(colSums(t(otudata))))
-  dmat <- prob.dropout(input = t(otudata), is.count = T, mcore = 3,offsets = offsets)
+    dmat <- prob.dropout(input = t(otudata), is.count = T, mcore = 3,offsets = offsets)
+  }else if (method == 'zig'){
+    physeq2 <- otu_table(input,taxa_are_rows = TRUE)
+    physeq2 <- phyloseq(physeq2)
+    ### read metadata if applicable
+    sampledata <- sample_data(data.frame(rep(NA,dim(input)[2]), row.names=sample_names(physeq2), strinsAsFactors = FALSE))
+    physeq2 <- merge_phyloseq(physeq2,sampledata)
+    mseq_obj <- phyloseq_to_metagenomeSeq(physeq2)
+    pd <- pData(mseq_obj)
+    mod <- model.matrix(~1, data = pd)
+    post <- fitZig(mseq_obj,mod)
+    dmat <- post@z
+  }
   dprob <- 0.5
   
   nc <- dim(input)[2]  # number of samples
