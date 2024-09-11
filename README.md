@@ -26,6 +26,7 @@ output2<-phyimpute(otudata=otu.tab, tree=phytree,method='zig')
 ####### UniFracImpute ###########
 
 output3 <- unifracimpute(otudata=otu.tab, tree=phytree, method = 'pnb')
+
 output4 <- unifracimpute(otudata=otu.tab, tree=phytree,method='zig')
 
 ####### Plot the Results ##########
