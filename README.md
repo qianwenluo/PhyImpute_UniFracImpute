@@ -15,10 +15,10 @@ otu.tab <- read.csv("otu_example.csv",row.names = 1,check.names = FALSE)
 
 ####### PhyImpute ##############
 
-## Use PNB to estimate posterior probabilities 
+####Use PNB to estimate posterior probabilities 
 output1<-phyimpute(otudata=otu.tab, tree=phytree, method = 'pnb')
 
-## Use Zero Inflated Gamma to estimate posterior probabilities
+####Use Zero Inflated Gamma to estimate posterior probabilities
 output2<-phyimpute(otudata=otu.tab, tree=phytree,method='zig')
 
 ####### UniFracImpute ###########
