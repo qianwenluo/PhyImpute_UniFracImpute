@@ -3,8 +3,21 @@
 unifracimpute <- function(otudata, tree){
   
   ####### calculate the probabilities of non-biological zeros #######
-  offsets <- as.numeric(log(colSums(t(otudata))))
-  dmat <- prob.dropout(input = t(otudata), is.count = F, mcore = 3,offsets = offsets)
+  if (method == 'pnb'){
+    offsets <- as.numeric(log(colSums(t(otudata))))
+    dmat <- prob.dropout(input = t(otudata), is.count = F, mcore = 3,offsets = offsets)
+  }else if (method == 'zig'){
+    physeq2 <- otu_table(otudata,taxa_are_rows = FALSE)
+    physeq2 <- phyloseq(physeq2)
+    ### read metadata if applicable
+    sampledata <- sample_data(data.frame(rep(NA,dim(otudata)[1]), row.names=sample_names(physeq2), strinsAsFactors = FALSE))
+    physeq2 <- merge_phyloseq(physeq2,sampledata)
+    mseq_obj <- phyloseq_to_metagenomeSeq(physeq2)
+    pd <- pData(mseq_obj)
+    mod <- model.matrix(~1, data = pd)
+    post <- fitZig(mseq_obj,mod)
+    dmat <- post@z
+  }
   dprob <- 0.5
   
   otudata <- as.matrix(otudata)
